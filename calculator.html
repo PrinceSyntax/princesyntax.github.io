@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Scientific Calculator</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #05001c,
+                    #10004d,
+                    #002b45,
+                    #05001c
+                );
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        /* Background circles */
+
+        .circle {
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(5px);
+
+            opacity: 0.5;
+
+            animation: float 8s infinite ease-in-out;
+        }
+
+        .circle1 {
+            width: 260px;
+            height: 260px;
+
+            background: #7c3aed;
+
+            top: -100px;
+            left: -80px;
+        }
+
+        .circle2 {
+            width: 220px;
+            height: 220px;
+
+            background: #06b6d4;
+
+            right: -70px;
+            bottom: -70px;
+
+            animation-delay: 2s;
+        }
+
+        .circle3 {
+            width: 130px;
+            height: 130px;
+
+            background: #ec4899;
+
+            right: 15%;
+            top: 10%;
+
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+
+            0% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px) scale(1.1);
+            }
+
+            100% {
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Calculator */
+
+        .calculator {
+
+            width: 430px;
+
+            padding: 22px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            backdrop-filter: blur(20px);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,0.5);
+
+            position: relative;
+
+            z-index: 5;
+
+            animation: appear 0.8s ease;
+        }
+
+        @keyframes appear {
+
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Header */
+
+        .title {
+            text-align: center;
+
+            color: white;
+
+            font-size: 24px;
+
+            margin-bottom: 15px;
+        }
+
+        .title span {
+            color: #67e8f9;
+        }
+
+        /* Display */
+
+        .display {
+
+            width: 100%;
+
+            min-height: 100px;
+
+            padding: 18px;
+
+            margin-bottom: 15px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(0,0,0,0.45);
+
+            border:
+                1px solid
+                rgba(103,232,249,0.2);
+
+            color: white;
+
+            text-align: right;
+
+            overflow: hidden;
+        }
+
+        #expression {
+
+            min-height: 25px;
+
+            color: #94a3b8;
+
+            font-size: 15px;
+
+            overflow-x: auto;
+        }
+
+        #result {
+
+            margin-top: 8px;
+
+            font-size: 32px;
+
+            font-weight: bold;
+
+            color: #67e8f9;
+
+            overflow-x: auto;
+        }
+
+        /* Mode */
+
+        .top-buttons {
+
+            display: flex;
+
+            gap: 8px;
+
+            margin-bottom: 12px;
+        }
+
+        .mode {
+
+            flex: 1;
+
+            padding: 10px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,0.1);
+
+            color: #cbd5e1;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .mode.active {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #06b6d4
+                );
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+        /* Buttons */
+
+        .buttons {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(5, 1fr);
+
+            gap: 9px;
+        }
+
+        button {
+
+            height: 52px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            color: white;
+
+            background:
+                rgba(255,255,255,0.09);
+
+            transition: 0.2s;
+
+            box-shadow:
+                inset 0 0 0 1px
+                rgba(255,255,255,0.05);
+        }
+
+        button:hover {
+
+            transform: translateY(-3px);
+
+            background:
+                rgba(103,232,249,0.2);
+
+            box-shadow:
+                0 5px 15px
+                rgba(6,182,212,0.2);
+        }
+
+        button:active {
+
+            transform: scale(0.94);
+        }
+
+        .function {
+
+            color: #67e8f9;
+
+            background:
+                rgba(6,182,212,0.08);
+        }
+
+        .operator {
+
+            color: #c4b5fd;
+
+            background:
+                rgba(124,58,237,0.15);
+        }
+
+        .clear {
+
+            color: #fca5a5;
+
+            background:
+                rgba(239,68,68,0.12);
+        }
+
+        .equal {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #06b6d4
+                );
+
+            grid-column:
+                span 2;
+        }
+
+        .number {
+
+            background:
+                rgba(255,255,255,0.12);
+        }
+
+        /* History */
+
+        .history {
+
+            margin-top: 15px;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+        /* Mobile */
+
+        @media(max-width: 480px) {
+
+            .calculator {
+
+                width: 95%;
+
+                padding: 15px;
+            }
+
+            button {
+
+                height: 47px;
+
+                font-size: 13px;
+            }
+
+            #result {
+
+                font-size: 26px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Animated Background -->
+
+    <div class="circle circle1"></div>
+    <div class="circle circle2"></div>
+    <div class="circle circle3"></div>
+
+
+    <!-- Calculator -->
+
+    <div class="calculator">
+
+        <div class="title">
+            🧮 <span>Scientific</span> Calculator
+        </div>
+
+
+        <!-- Display -->
+
+        <div class="display">
+
+            <div id="expression">
+                0
+            </div>
+
+            <div id="result">
+                0
+            </div>
+
+        </div>
+
+
+        <!-- DEG / RAD -->
+
+        <div class="top-buttons">
+
+            <button
+                class="mode active"
+                id="deg"
+                onclick="setMode('DEG')">
+                DEG
+            </button>
+
+            <button
+                class="mode"
+                id="rad"
+                onclick="setMode('RAD')">
+                RAD
+            </button>
+
+        </div>
+
+
+        <!-- Buttons -->
+
+        <div class="buttons">
+
+
+            <!-- Row 1 -->
+
+            <button
+                class="clear"
+                onclick="clearAll()">
+                AC
+            </button>
+
+            <button
+                class="clear"
+                onclick="backspace()">
+                DEL
+            </button>
+
+            <button
+                class="function"
+                onclick="insert('(')">
+                (
+            </button>
+
+            <button
+                class="function"
+                onclick="insert(')')">
+                )
+            </button>
+
+            <button
+                class="operator"
+                onclick="insert('/')">
+                ÷
+            </button>
+
+
+            <!-- Row 2 -->
+
+            <button
+                class="function"
+                onclick="calculateFunction('sin')">
+                sin
+            </button>
+
+            <button
+                class="function"
+                onclick="calculateFunction('cos')">
+                cos
+            </button>
+
+            <button
+                class="function"
+                onclick="calculateFunction('tan')">
+                tan
+            </button>
+
+            <button
+                class="function"
+                onclick="calculateFunction('log')">
+                log
+            </button>
+
+            <button
+                class="operator"
+                onclick="insert('*')">
+                ×
+            </button>
+
+
+            <!-- Row 3 -->
+
+            <button
+                class="function"
+                onclick="calculateFunction('ln')">
+                ln
+            </button>
+
+            <button
+                class="function"
+                onclick="squareRoot()">
+                √
+            </button>
+
+            <button
+                class="function"
+                onclick="square()">
+                x²
+            </button>
+
+            <button
+                class="function"
+                onclick="insert('Math.PI')">
+                π
+            </button>
+
+            <button
+                class="operator"
+                onclick="insert('-')">
+                −
+            </button>
+
+
+            <!-- Row 4 -->
+
+            <button
+                class="number"
+                onclick="insert('7')">
+                7
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('8')">
+                8
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('9')">
+                9
+            </button>
+
+            <button
+                class="function"
+                onclick="factorial()">
+                x!
+            </button>
+
+            <button
+                class="operator"
+                onclick="insert('+')">
+                +
+            </button>
+
+
+            <!-- Row 5 -->
+
+            <button
+                class="number"
+                onclick="insert('4')">
+                4
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('5')">
+                5
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('6')">
+                6
+            </button>
+
+            <button
+                class="function"
+                onclick="insert('Math.E')">
+                e
+            </button>
+
+            <button
+                class="function"
+                onclick="insert('%')">
+                %
+            </button>
+
+
+            <!-- Row 6 -->
+
+            <button
+                class="number"
+                onclick="insert('1')">
+                1
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('2')">
+                2
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('3')">
+                3
+            </button>
+
+            <button
+                class="function"
+                onclick="inverse()">
+                1/x
+            </button>
+
+            <button
+                class="operator"
+                onclick="insert('**')">
+                xʸ
+            </button>
+
+
+            <!-- Row 7 -->
+
+            <button
+                class="number"
+                onclick="insert('0')">
+                0
+            </button>
+
+            <button
+                class="number"
+                onclick="insert('.')">
+                .
+            </button>
+
+            <button
+                class="function"
+                onclick="toggleSign()">
+                ±
+            </button>
+
+            <button
+                class="equal"
+                onclick="calculate()">
+                =
+            </button>
+
+
+        </div>
+
+
+        <div class="history">
+            💡 Tip: Keyboard se bhi calculator use kar sakte ho
+        </div>
+
+    </div>
+
+
+    <script>
+
+        let expression = "";
+
+        let mode = "DEG";
+
+
+        const expressionDisplay =
+            document.getElementById(
+                "expression"
+            );
+
+        const resultDisplay =
+            document.getElementById(
+                "result"
+            );
+
+
+        /* =========================
+           INSERT
+        ========================= */
+
+        function insert(value) {
+
+            expression += value;
+
+            updateDisplay();
+        }
+
+
+        /* =========================
+           DISPLAY
+        ========================= */
+
+        function updateDisplay() {
+
+            expressionDisplay.innerText =
+                expression || "0";
+        }
+
+
+        /* =========================
+           CLEAR
+        ========================= */
+
+        function clearAll() {
+
+            expression = "";
+
+            resultDisplay.innerText = "0";
+
+            updateDisplay();
+        }
+
+
+        /* =========================
+           DELETE
+        ========================= */
+
+        function backspace() {
+
+            expression =
+                expression.slice(0, -1);
+
+            updateDisplay();
+        }
+
+
+        /* =========================
+           DEG / RAD
+        ========================= */
+
+        function setMode(newMode) {
+
+            mode = newMode;
+
+            document
+                .getElementById("deg")
+                .classList.remove("active");
+
+            document
+                .getElementById("rad")
+                .classList.remove("active");
+
+
+            document
+                .getElementById(
+                    newMode === "DEG"
+                        ? "deg"
+                        : "rad"
+                )
+                .classList.add("active");
+        }
+
+
+        /* =========================
+           SIN COS TAN
+        ========================= */
+
+        function calculateFunction(func) {
+
+            if (expression === "") {
+                return;
+            }
+
+            try {
+
+                let number =
+                    eval(expression);
+
+
+                if (mode === "DEG") {
+
+                    number =
+                        number * Math.PI / 180;
+                }
+
+
+                let answer;
+
+
+                if (func === "sin") {
+
+                    answer =
+                        Math.sin(number);
+                }
+
+                else if (func === "cos") {
+
+                    answer =
+                        Math.cos(number);
+                }
+
+                else if (func === "tan") {
+
+                    answer =
+                        Math.tan(number);
+                }
+
+                else if (func === "log") {
+
+                    answer =
+                        Math.log10(number);
+                }
+
+                else if (func === "ln") {
+
+                    answer =
+                        Math.log(number);
+                }
+
+
+                expression =
+                    String(answer);
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+                expressionDisplay.innerText =
+                    func + "(" + number + ")";
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           SQUARE ROOT
+        ========================= */
+
+        function squareRoot() {
+
+            try {
+
+                let number =
+                    eval(expression);
+
+                let answer =
+                    Math.sqrt(number);
+
+                expression =
+                    String(answer);
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+                expressionDisplay.innerText =
+                    "√" + number;
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           SQUARE
+        ========================= */
+
+        function square() {
+
+            try {
+
+                let number =
+                    eval(expression);
+
+                let answer =
+                    number * number;
+
+                expression =
+                    String(answer);
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+                expressionDisplay.innerText =
+                    number + "²";
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           FACTORIAL
+        ========================= */
+
+        function factorial() {
+
+            try {
+
+                let number =
+                    eval(expression);
+
+
+                if (
+                    number < 0 ||
+                    !Number.isInteger(number)
+                ) {
+
+                    showError();
+
+                    return;
+                }
+
+
+                let answer = 1;
+
+
+                for (
+                    let i = 2;
+                    i <= number;
+                    i++
+                ) {
+
+                    answer *= i;
+                }
+
+
+                expression =
+                    String(answer);
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+                expressionDisplay.innerText =
+                    number + "!";
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           INVERSE
+        ========================= */
+
+        function inverse() {
+
+            try {
+
+                let number =
+                    eval(expression);
+
+                let answer =
+                    1 / number;
+
+                expression =
+                    String(answer);
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           SIGN
+        ========================= */
+
+        function toggleSign() {
+
+            if (expression === "") {
+                return;
+            }
+
+            expression =
+                "-(" + expression + ")";
+
+            updateDisplay();
+        }
+
+
+        /* =========================
+           CALCULATE
+        ========================= */
+
+        function calculate() {
+
+            try {
+
+                if (expression === "") {
+                    return;
+                }
+
+
+                let answer =
+                    eval(expression);
+
+
+                if (!Number.isFinite(answer)) {
+
+                    showError();
+
+                    return;
+                }
+
+
+                resultDisplay.innerText =
+                    formatNumber(answer);
+
+            }
+
+            catch {
+
+                showError();
+            }
+        }
+
+
+        /* =========================
+           FORMAT NUMBER
+        ========================= */
+
+        function formatNumber(number) {
+
+            if (
+                Number.isInteger(number)
+            ) {
+
+                return number;
+            }
+
+
+            return Number(
+                number.toFixed(10)
+            );
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        function showError() {
+
+            resultDisplay.innerText =
+                "Error";
+
+            setTimeout(
+                function() {
+
+                    resultDisplay.innerText =
+                        "0";
+
+                },
+                1500
+            );
+        }
+
+
+        /* =========================
+           KEYBOARD SUPPORT
+        ========================= */
+
+        document.addEventListener(
+            "keydown",
+            function(event) {
+
+                const key =
+                    event.key;
+
+
+                if (
+                    /[0-9+\-*/().]/.test(key)
+                ) {
+
+                    insert(key);
+
+                }
+
+                else if (
+                    key === "Enter" ||
+                    key === "="
+                ) {
+
+                    calculate();
+
+                }
+
+                else if (
+                    key === "Backspace"
+                ) {
+
+                    backspace();
+
+                }
+
+                else if (
+                    key === "Escape"
+                ) {
+
+                    clearAll();
+                }
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

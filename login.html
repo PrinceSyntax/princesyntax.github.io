@@ -1,0 +1,821 @@
+```html
+<!DOCTYPE html>
+<html >
+
+<head>
+
+
+    <title>Student Login</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #08001f,
+                    #14005c,
+                    #001b4d,
+                    #00142e
+                );
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           ANIMATED BACKGROUND
+        ========================= */
+
+        .circle {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(2px);
+
+            opacity: 0.5;
+
+            animation:
+                floating 8s infinite ease-in-out;
+        }
+
+
+        .circle1 {
+
+            width: 250px;
+            height: 250px;
+
+            background: #7c3aed;
+
+            top: -80px;
+            left: -80px;
+        }
+
+
+        .circle2 {
+
+            width: 200px;
+            height: 200px;
+
+            background: #06b6d4;
+
+            bottom: -70px;
+            right: -50px;
+
+            animation-delay: 2s;
+        }
+
+
+        .circle3 {
+
+            width: 130px;
+            height: 130px;
+
+            background: #ec4899;
+
+            right: 10%;
+            top: 35%;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes floating {
+
+            0% {
+                transform: translateY(0)
+                           scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px)
+                           scale(1.1);
+            }
+
+            100% {
+                transform: translateY(0)
+                           scale(1);
+            }
+        }
+
+
+        /* =========================
+           LOGIN CONTAINER
+        ========================= */
+
+        .login-container {
+
+            width: 100%;
+            max-width: 430px;
+
+            position: relative;
+
+            z-index: 5;
+
+            animation:
+                loginEnter 1s ease;
+        }
+
+
+        @keyframes loginEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(50px)
+                    scale(0.9);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           LOGIN CARD
+        ========================= */
+
+        .login-card {
+
+            padding: 40px 35px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,0.5);
+        }
+
+
+        /* =========================
+           LOGO
+        ========================= */
+
+        .logo {
+
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 18px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 0 30px
+                rgba(6,182,212,0.7);
+
+            animation:
+                pulse 2s infinite;
+        }
+
+
+        @keyframes pulse {
+
+            0% {
+                box-shadow:
+                    0 0 15px
+                    rgba(139,92,246,0.5);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 40px
+                    rgba(6,182,212,0.9);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 15px
+                    rgba(139,92,246,0.5);
+            }
+        }
+
+
+        /* =========================
+           HEADING
+        ========================= */
+
+        .login-card h1 {
+
+            text-align: center;
+
+            font-size: 32px;
+
+            margin-bottom: 8px;
+
+            color: white;
+        }
+
+
+        .login-card .subtitle {
+
+            text-align: center;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border-radius: 12px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            outline: none;
+
+            color: white;
+
+            background:
+                rgba(0,0,0,0.25);
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .form-group input::placeholder {
+
+            color: #94a3b8;
+        }
+
+
+        .form-group input:focus {
+
+            border-color:
+                #67e8f9;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(103,232,249,0.12),
+
+                0 0 20px
+                rgba(103,232,249,0.2);
+        }
+
+
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            cursor: pointer;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c3aed,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200%;
+
+            animation:
+                buttonAnimation 4s
+                infinite linear;
+
+            transition: 0.3s;
+        }
+
+
+        @keyframes buttonAnimation {
+
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+
+        .login-btn:hover {
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                0 12px 30px
+                rgba(6,182,212,0.4);
+        }
+
+
+        .login-btn:active {
+
+            transform:
+                scale(0.98);
+        }
+
+
+        /* =========================
+           LINKS
+        ========================= */
+
+        .links {
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        .links a {
+
+            color: #67e8f9;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .links a:hover {
+
+            color: white;
+
+            text-shadow:
+                0 0 10px
+                #67e8f9;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
+        .error {
+
+            color: #fca5a5;
+
+            font-size: 12px;
+
+            margin-top: 6px;
+
+            display: block;
+
+            min-height: 15px;
+        }
+
+
+        /* =========================
+           SUCCESS POPUP
+        ========================= */
+
+        .success-popup {
+
+            position: fixed;
+
+            top: 30px;
+
+            right: 30px;
+
+            padding:
+                17px 25px;
+
+            background: white;
+
+            color: #16a34a;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.3);
+
+            z-index: 9999;
+
+            animation:
+                popupIn 0.5s ease;
+        }
+
+
+        @keyframes popupIn {
+
+            from {
+
+                transform:
+                    translateX(120%);
+
+                opacity: 0;
+            }
+
+            to {
+
+                transform:
+                    translateX(0);
+
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 500px) {
+
+            body {
+
+                padding: 20px;
+            }
+
+            .login-card {
+
+                padding:
+                    30px 22px;
+            }
+
+            .login-card h1 {
+
+                font-size: 27px;
+            }
+
+            .success-popup {
+
+                left: 20px;
+
+                right: 20px;
+
+                text-align: center;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- BACKGROUND -->
+
+    <div class="circle circle1"></div>
+
+    <div class="circle circle2"></div>
+
+    <div class="circle circle3"></div>
+
+
+    <!-- LOGIN -->
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+
+            <div class="logo">
+                S
+            </div>
+
+
+            <h1>
+                Welcome Back 👋
+            </h1>
+
+
+            <p class="subtitle">
+                Login to your student account
+            </p>
+
+
+            <form id="loginForm">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        EMAIL ADDRESS
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your email"
+                        required
+                    >
+
+                    <small
+                        id="emailError"
+                        class="error"
+                    ></small>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        PASSWORD
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter your password"
+                        required
+                    >
+
+                    <small
+                        id="passwordError"
+                        class="error"
+                    ></small>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                >
+
+                    🔐 LOGIN
+
+                </button>
+
+
+            </form>
+
+
+            <div class="links">
+
+              <div class="links">
+    Don't have an account?
+    <a href="form.html">Register Now</a>
+</div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        const loginForm =
+            document.getElementById(
+                "loginForm"
+            );
+
+
+        loginForm.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    );
+
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    );
+
+
+                const emailError =
+                    document.getElementById(
+                        "emailError"
+                    );
+
+
+                const passwordError =
+                    document.getElementById(
+                        "passwordError"
+                    );
+
+
+                let valid = true;
+
+
+                /* EMAIL */
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                if (
+                    !emailPattern.test(
+                        email.value
+                    )
+                ) {
+
+                    emailError.innerText =
+                        "⚠️ Please enter a valid email.";
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    emailError.innerText = "";
+
+                }
+
+
+                /* PASSWORD */
+
+                if (
+                    password.value.length < 6
+                ) {
+
+                    passwordError.innerText =
+                        "⚠️ Password must contain at least 6 characters.";
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    passwordError.innerText = "";
+
+                }
+
+
+                /* SUCCESS */
+
+                if (valid) {
+
+                    const popup =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    popup.className =
+                        "success-popup";
+
+
+                    popup.innerHTML =
+                        "✓ 🎉 Login Successful!";
+
+
+                    document.body.appendChild(
+                        popup
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            popup.remove();
+
+                        },
+                        3000
+                    );
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```

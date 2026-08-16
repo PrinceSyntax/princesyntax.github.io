@@ -1,0 +1,1546 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registration</title>
+
+
+    <style>
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        /* =========================
+           BODY
+        ========================= */
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 40px 15px;
+
+            font-family: Arial, sans-serif;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #08001f,
+                    #14005c,
+                    #001b4d,
+                    #00142e
+                );
+
+            overflow-x: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================
+           ANIMATED CIRCLES
+        ========================= */
+
+        .circle {
+
+            position: absolute;
+
+            border-radius: 50%;
+
+            filter: blur(2px);
+
+            opacity: 0.5;
+
+            animation:
+                floating 8s infinite ease-in-out;
+        }
+
+
+        .circle1 {
+
+            width: 250px;
+            height: 250px;
+
+            background: #7c3aed;
+
+            top: -80px;
+            left: -80px;
+        }
+
+
+        .circle2 {
+
+            width: 200px;
+            height: 200px;
+
+            background: #06b6d4;
+
+            bottom: -70px;
+            right: -50px;
+
+            animation-delay: 2s;
+        }
+
+
+        .circle3 {
+
+            width: 130px;
+            height: 130px;
+
+            background: #ec4899;
+
+            top: 40%;
+            right: 8%;
+
+            animation-delay: 4s;
+        }
+
+
+        @keyframes floating {
+
+            0% {
+                transform: translateY(0)
+                           scale(1);
+            }
+
+            50% {
+                transform: translateY(-30px)
+                           scale(1.1);
+            }
+
+            100% {
+                transform: translateY(0)
+                           scale(1);
+            }
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+
+            width: 100%;
+
+            max-width: 560px;
+
+            position: relative;
+
+            z-index: 5;
+
+            animation:
+                pageEnter 1s ease;
+        }
+
+
+        @keyframes pageEnter {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(50px)
+                    scale(0.95);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            text-align: center;
+
+            color: white;
+
+            margin-bottom: 25px;
+        }
+
+
+        .logo {
+
+            width: 65px;
+            height: 65px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            font-size: 28px;
+
+            font-weight: bold;
+
+            color: white;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #8b5cf6,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 0 30px
+                rgba(6,182,212,0.7);
+
+            animation:
+                logoPulse 2s infinite;
+        }
+
+
+        @keyframes logoPulse {
+
+            0% {
+                box-shadow:
+                    0 0 15px
+                    rgba(139,92,246,0.5);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 40px
+                    rgba(6,182,212,0.9);
+            }
+
+            100% {
+                box-shadow:
+                    0 0 15px
+                    rgba(139,92,246,0.5);
+            }
+        }
+
+
+        .header h1 {
+
+            font-size: 34px;
+
+            margin-bottom: 8px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #ffffff,
+                    #67e8f9,
+                    #c4b5fd,
+                    #ffffff
+                );
+
+            background-size: 300%;
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+
+            animation:
+                textAnimation 4s
+                infinite linear;
+        }
+
+
+        @keyframes textAnimation {
+
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 300%;
+            }
+        }
+
+
+        .header p {
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FORM CARD
+        ========================= */
+
+        .form-card {
+
+            padding: 35px;
+
+            border-radius: 25px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            box-shadow:
+                0 30px 80px
+                rgba(0,0,0,0.45);
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+
+        /* =========================
+           FORM GROUP
+        ========================= */
+
+        .form-group {
+
+            margin-bottom: 19px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #e2e8f0;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 8px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 14px 16px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.2);
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background:
+                rgba(0,0,0,0.25);
+
+            color: white;
+
+            font-size: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        input::placeholder {
+
+            color: #94a3b8;
+        }
+
+
+        select option {
+
+            color: black;
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #67e8f9;
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(103,232,249,0.12),
+
+                0 0 20px
+                rgba(103,232,249,0.2);
+        }
+
+
+        /* =========================
+           ERROR MESSAGE
+        ========================= */
+
+        .error {
+
+            display: block;
+
+            color: #fca5a5;
+
+            font-size: 12px;
+
+            margin-top: 5px;
+
+            min-height: 15px;
+        }
+
+
+        .input-error {
+
+            border-color:
+                #ef4444 !important;
+
+            box-shadow:
+                0 0 10px
+                rgba(239,68,68,0.3);
+        }
+
+
+        .input-success {
+
+            border-color:
+                #22c55e !important;
+
+            box-shadow:
+                0 0 10px
+                rgba(34,197,94,0.3);
+        }
+
+
+        /* =========================
+           GENDER
+        ========================= */
+
+        .gender-box {
+
+            display: flex;
+
+            gap: 12px;
+        }
+
+
+        .gender-option {
+
+            flex: 1;
+
+            padding: 12px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            color: #cbd5e1;
+
+            background:
+                rgba(0,0,0,0.2);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            transition: 0.3s;
+        }
+
+
+        .gender-option:hover {
+
+            transform:
+                translateY(-3px);
+
+            border-color:
+                #67e8f9;
+
+            color: white;
+
+            background:
+                rgba(103,232,249,0.1);
+        }
+
+
+        .gender-option input {
+
+            accent-color:
+                #06b6d4;
+
+            margin-right: 5px;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .register-btn {
+
+            width: 100%;
+
+            padding: 15px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            cursor: pointer;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            letter-spacing: 1px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #7c3aed,
+                    #06b6d4,
+                    #7c3aed
+                );
+
+            background-size: 200%;
+
+            transition: 0.3s;
+
+            animation:
+                buttonAnimation 4s
+                infinite linear;
+
+            box-shadow:
+                0 10px 25px
+                rgba(6,182,212,0.25);
+        }
+
+
+        @keyframes buttonAnimation {
+
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 200%;
+            }
+        }
+
+
+        .register-btn:hover {
+
+            transform:
+                translateY(-4px)
+                scale(1.01);
+
+            box-shadow:
+                0 15px 35px
+                rgba(6,182,212,0.4);
+        }
+
+
+        .register-btn:active {
+
+            transform:
+                scale(0.98);
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+
+            text-align: center;
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-top: 18px;
+        }
+
+
+        /* =========================
+           SUCCESS POPUP
+        ========================= */
+
+        .success-popup {
+
+            position: fixed;
+
+            top: 30px;
+
+            right: 30px;
+
+            background: white;
+
+            color: #16a34a;
+
+            padding:
+                18px 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.3);
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            z-index: 9999;
+
+            animation:
+                popupIn 0.5s ease;
+        }
+
+
+        @keyframes popupIn {
+
+            from {
+
+                transform:
+                    translateX(120%);
+
+                opacity: 0;
+            }
+
+            to {
+
+                transform:
+                    translateX(0);
+
+                opacity: 1;
+            }
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width:600px) {
+
+            body {
+
+                padding:
+                    25px 12px;
+            }
+
+            .form-card {
+
+                padding:
+                    25px 20px;
+            }
+
+            .header h1 {
+
+                font-size: 27px;
+            }
+
+            .gender-box {
+
+                flex-direction:
+                    column;
+            }
+
+            .success-popup {
+
+                left: 20px;
+
+                right: 20px;
+
+                top: 20px;
+
+                text-align: center;
+            }
+        }
+        .top-login {
+    width: 100%;
+    max-width: 560px;
+
+    margin: 0 auto 18px;
+
+    padding: 12px 18px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(103, 232, 249, 0.25);
+
+    border-radius: 14px;
+
+    backdrop-filter: blur(15px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.2);
+
+    animation: loginTop 0.8s ease;
+}
+
+.top-login span {
+    color: #dbeafe;
+
+    font-size: 14px;
+}
+
+.top-login a {
+    text-decoration: none;
+
+    padding: 9px 18px;
+
+    border-radius: 9px;
+
+    color: white;
+
+    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c3aed,
+            #06b6d4
+        );
+
+    box-shadow:
+        0 5px 15px
+        rgba(6, 182, 212, 0.25);
+
+    transition: 0.3s;
+}
+
+.top-login a:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 22px
+        rgba(6, 182, 212, 0.5);
+}
+
+@keyframes loginTop {
+
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Animated Background -->
+
+    <div class="circle circle1"></div>
+
+    <div class="circle circle2"></div>
+
+    <div class="circle circle3"></div>
+
+
+    <div class="container">
+
+
+        <!-- HEADER -->
+
+        <div class="header">
+
+            <div class="logo">
+                S
+            </div>
+
+            <h1>
+                Student Registration
+            </h1>
+
+            <p>
+                Join our learning community
+                and start your journey
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+        
+            class="form-card"
+            id="registrationForm"
+        >
+<div class="top-login">
+
+    <span> Registered Now?</span>
+
+    <a href="login.html">
+        🔐 Login
+    </a>
+
+</div>
+
+            <!-- NAME -->
+                    
+            <div class="form-group">
+
+                <label for="name">
+                    FULL NAME
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+                <small
+                    id="nameError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    EMAIL ADDRESS
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="example@gmail.com"
+                    required
+                >
+
+                <small
+                    id="emailError"
+                    class="error"
+                ></small>
+
+            </div>
+           
+
+            <!-- GENDER -->
+
+            <div class="form-group">
+
+                <label>
+                    GENDER
+                </label>
+
+                <div class="gender-box">
+
+                    <label
+                        class="gender-option"
+                    >
+
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Male"
+                        >
+
+                        Male
+
+                    </label>
+
+
+                    <label
+                        class="gender-option"
+                    >
+
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Female"
+                        >
+
+                        Female
+
+                    </label>
+
+
+                    <label
+                        class="gender-option"
+                    >
+
+                        <input
+                            type="radio"
+                            name="gender"
+                            value="Other"
+                        >
+
+                        Other
+
+                    </label>
+
+                </div>
+
+                <small
+                    id="genderError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+                <small
+                    id="passwordError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- CONFIRM PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    CONFIRM PASSWORD
+                </label>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm your password"
+                    required
+                >
+
+                <small
+                    id="confirmError"
+                    class="error"
+                ></small>
+
+            </div>
+             <div class="form-group">
+
+               <label for="file" class="upload-btn">
+    📷 Upload Photo
+</label>
+
+<input type="file" id="file" accept="image/*">
+            <!-- PHONE -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    PHONE NUMBER
+                </label>
+
+                <input
+                    type="tel"
+                    id="phone"
+                    maxlength="10"
+                    placeholder="Enter 10 digit number"
+                    required
+                >
+
+                <small
+                    id="phoneError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- DOB -->
+
+            <div class="form-group">
+
+                <label for="dob">
+                    DATE OF BIRTH
+                </label>
+
+                <input
+                    type="date"
+                    id="dob"
+                    required
+                >
+
+                <small
+                    id="dobError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- COURSE -->
+
+            <div class="form-group">
+
+                <label for="course">
+                    SELECT COURSE
+                </label>
+
+                <select
+                    id="course"
+                    required
+                >
+
+                    <option value="">
+                        Choose your course
+                    </option>
+
+                    <option value="Computer Science">
+                        Computer Science
+                    </option>
+
+                    <option value="Mathematics">
+                        Mathematics
+                    </option>
+
+                    <option value="Physics">
+                        Physics
+                    </option>
+
+                    <option value="Engineering">
+                        Engineering
+                    </option>
+
+                </select>
+
+                <small
+                    id="courseError"
+                    class="error"
+                ></small>
+
+            </div>
+
+
+            <!-- BUTTON -->
+
+            <button
+                type="submit"
+                class="register-btn"
+            >
+
+                ✨ REGISTER NOW
+
+            </button>
+            <div>
+   
+            </div>
+
+
+            <div class="footer">
+
+                🔒 Your information is safe and secure
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+
+        const form =
+            document.getElementById(
+                "registrationForm"
+            );
+
+
+        /* =========================
+           NAME VALIDATION
+        ========================= */
+
+        const nameInput =
+            document.getElementById("name");
+
+
+        nameInput.addEventListener(
+            "input",
+            function() {
+
+                const value =
+                    nameInput.value.trim();
+
+                const error =
+                    document.getElementById(
+                        "nameError"
+                    );
+
+
+                if (/\d/.test(value)) {
+
+                    error.innerText =
+                        "⚠️ The name should not contain numbers.";
+
+                    nameInput.classList.add(
+                        "input-error"
+                    );
+
+                    nameInput.classList.remove(
+                        "input-success"
+                    );
+
+                }
+
+                else if (value.length > 0) {
+
+                    error.innerText = "";
+
+                    nameInput.classList.remove(
+                        "input-error"
+                    );
+
+                    nameInput.classList.add(
+                        "input-success"
+                    );
+
+                }
+
+                else {
+
+                    error.innerText = "";
+
+                    nameInput.classList.remove(
+                        "input-error",
+                        "input-success"
+                    );
+                }
+
+            }
+        );
+
+
+        /* =========================
+           PHONE VALIDATION
+        ========================= */
+
+        const phoneInput =
+            document.getElementById("phone");
+
+
+        phoneInput.addEventListener(
+            "input",
+            function() {
+
+                phoneInput.value =
+                    phoneInput.value.replace(
+                        /[^0-9]/g,
+                        ""
+                    );
+
+            }
+        );
+
+
+        /* =========================
+           FORM SUBMIT
+        ========================= */
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                let valid = true;
+
+
+                /* NAME */
+
+                const name =
+                    nameInput.value.trim();
+
+                if (
+                    name === "" ||
+                    /\d/.test(name)
+                ) {
+
+                    document.getElementById(
+                        "nameError"
+                    ).innerText =
+                        "⚠️ Please enter a valid name.";
+
+                    nameInput.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+
+                /* EMAIL */
+
+                const email =
+                    document.getElementById(
+                        "email"
+                    );
+
+
+                const emailPattern =
+                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+                if (
+                    !emailPattern.test(
+                        email.value
+                    )
+                ) {
+
+                    document.getElementById(
+                        "emailError"
+                    ).innerText =
+                        "⚠️ Please enter a valid email.";
+
+                    email.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    email.classList.remove(
+                        "input-error"
+                    );
+                }
+
+
+                /* GENDER */
+
+                const gender =
+                    document.querySelector(
+                        'input[name="gender"]:checked'
+                    );
+
+
+                if (!gender) {
+
+                    document.getElementById(
+                        "genderError"
+                    ).innerText =
+                        "⚠️ Please select your gender.";
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    document.getElementById(
+                        "genderError"
+                    ).innerText = "";
+                }
+
+
+                /* PASSWORD */
+
+                const password =
+                    document.getElementById(
+                        "password"
+                    );
+
+
+                if (
+                    password.value.length < 6
+                ) {
+
+                    document.getElementById(
+                        "passwordError"
+                    ).innerText =
+                        "⚠️ Password must contain at least 6 characters.";
+
+                    password.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    password.classList.remove(
+                        "input-error"
+                    );
+                }
+
+
+                /* CONFIRM PASSWORD */
+
+                const confirmPassword =
+                    document.getElementById(
+                        "confirmPassword"
+                    );
+
+
+                if (
+                    password.value !==
+                    confirmPassword.value
+                ) {
+
+                    document.getElementById(
+                        "confirmError"
+                    ).innerText =
+                        "⚠️ Passwords do not match.";
+
+                    confirmPassword.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    document.getElementById(
+                        "confirmError"
+                    ).innerText = "";
+
+                    confirmPassword.classList.remove(
+                        "input-error"
+                    );
+                }
+
+
+                /* PHONE */
+
+                if (
+                    phoneInput.value.length !== 10
+                ) {
+
+                    document.getElementById(
+                        "phoneError"
+                    ).innerText =
+                        "⚠️ Phone number must contain 10 digits.";
+
+                    phoneInput.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    document.getElementById(
+                        "phoneError"
+                    ).innerText = "";
+
+                    phoneInput.classList.remove(
+                        "input-error"
+                    );
+                }
+
+
+                /* DOB */
+
+                const dob =
+                    document.getElementById(
+                        "dob"
+                    );
+
+
+                if (dob.value === "") {
+
+                    document.getElementById(
+                        "dobError"
+                    ).innerText =
+                        "⚠️ Please select your date of birth.";
+
+                    dob.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    dob.classList.remove(
+                        "input-error"
+                    );
+
+                    document.getElementById(
+                        "dobError"
+                    ).innerText = "";
+                }
+
+
+                /* COURSE */
+
+                const course =
+                    document.getElementById(
+                        "course"
+                    );
+
+
+                if (course.value === "") {
+
+                    document.getElementById(
+                        "courseError"
+                    ).innerText =
+                        "⚠️ Please select a course.";
+
+                    course.classList.add(
+                        "input-error"
+                    );
+
+                    valid = false;
+
+                }
+
+                else {
+
+                    course.classList.remove(
+                        "input-error"
+                    );
+
+                    document.getElementById(
+                        "courseError"
+                    ).innerText = "";
+                }
+
+
+                /* =========================
+                   SUCCESS
+                ========================= */
+
+                if (valid) {
+
+                    const popup =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    popup.className =
+                        "success-popup";
+
+
+                    popup.innerHTML =
+                        "✓ 🎉 Registration Successful!";
+
+
+                    document.body.appendChild(
+                        popup
+                    );
+
+
+                    setTimeout(
+                        function() {
+
+                            popup.remove();
+
+                        },
+                        3000
+                    );
+
+
+                    form.reset();
+
+                }
+
+            }
+        );
+
+    </script>
+
+
+</body>
+
+</html>
+```

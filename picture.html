@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prince Arya | Gallery</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #e3f2fd, #f5f7fa);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        /* Heading */
+
+        .heading {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #1769e0;
+            font-size: 40px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #555;
+            margin-bottom: 35px;
+            font-size: 17px;
+        }
+
+        /* Gallery */
+
+        .gallery {
+            max-width: 1200px;
+            margin: auto;
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 22px;
+        }
+
+        /* Image Card */
+
+        .card {
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+
+            box-shadow:
+                0 8px 25px rgba(0, 0, 0, 0.15);
+
+            overflow: hidden;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.22);
+        }
+
+        /* Images */
+
+        .card img {
+            width: 100%;
+            height: 250px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+            display: block;
+
+            cursor: pointer;
+
+            transition: 0.4s;
+        }
+
+        .card:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Image Name */
+
+        .caption {
+            text-align: center;
+            padding: 12px 5px 5px;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            color: #333;
+        }
+
+        /* Back Button */
+
+        .button-area {
+            text-align: center;
+            margin-top: 35px;
+        }
+
+        .back-btn {
+            display: inline-block;
+
+            padding: 14px 30px;
+
+            background: #1769e0;
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+            font-size: 16px;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #0d47a1;
+            transform: translateY(-3px);
+        }
+
+        /* Popup */
+
+        .popup {
+            display: none;
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.85);
+
+            justify-content: center;
+            align-items: center;
+
+            z-index: 1000;
+
+            padding: 20px;
+        }
+
+        .popup img {
+            max-width: 90%;
+            max-height: 85%;
+
+            border-radius: 12px;
+
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Close Button */
+
+        .close {
+            position: absolute;
+
+            top: 25px;
+            right: 35px;
+
+            color: white;
+
+            font-size: 40px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .heading {
+                font-size: 30px;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .card img {
+                height: 300px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- Heading -->
+
+    <h1 class="heading">
+        📸 My Gallery
+    </h1>
+
+    <p class="subtitle">
+        Welcome to Prince Arya's Photo Gallery
+    </p>
+
+
+    <!-- Gallery -->
+
+    <div class="gallery">
+
+
+        <div class="card">
+            
+            <img src="image/pi1.jpeg"
+      
+                 alt="Prince Photo 1"
+                 onclick="openImage(this.src)">
+            <div class="caption">🙏</div>
+        </div>
+
+
+        <div class="card">
+          <img src="image/prince2.jpeg"
+                 alt="Prince Photo 2"
+                 onclick="openImage(this.src)">
+            <div class="caption">🫡</div>
+        </div>
+
+
+        <div class="card">
+            <img src="image/prince3.jpeg"
+                 alt="Prince Photo 3"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 3</div>
+        </div>
+
+
+        <div class="card">
+            <img src="image/pri.jpg.jpeg"
+           
+                 alt="Prince Photo 4"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 4</div>
+        </div>
+
+
+        <div class="card">
+            <img src="image/priii.jpeg"
+           
+           
+                 alt="Prince Photo 5"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 5</div>
+        </div>
+
+
+        <div class="card">
+            <img src="image/priiii.pmg.jpeg"
+                 alt="Prince Photo 6"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 6</div>
+        </div>
+
+
+        <div class="card">
+            <img src="image/pr.jpeg"
+                 alt="Prince Photo 7"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 7</div>
+        </div>
+
+
+        <!-- <div class="card">
+            <img src="image/princeprince8.jpg"
+                 alt="Prince Photo 8"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 8</div>
+        </div> -->
+
+
+        <!-- <div class="card">
+            <img src="image/princeprince9.jpg"
+                 alt="Prince Photo 9"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 9</div>
+        </div> -->
+
+
+        <div class="card">
+            <img src="image/prince10.jpeg"
+                 alt="Prince Photo 10"
+                 onclick="openImage(this.src)">
+            <div class="caption">Photo 8</div>
+        </div>
+
+
+
+
+    </div>
+
+
+    <!-- Back Button -->
+
+    <div class="button-area">
+
+        <a href="index.html" class="back-btn">
+            ← Back to Portfolio
+        </a>
+
+    </div>
+
+
+    <!-- Full Screen Popup -->
+
+    <div class="popup" id="popup">
+
+        <span class="close" onclick="closeImage()">
+            &times;
+        </span>
+
+        <img id="popupImage" src="" alt="Full Image">
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        function openImage(imageSrc) {
+
+            document.getElementById("popupImage").src = imageSrc;
+
+            document.getElementById("popup").style.display = "flex";
+
+        }
+
+
+        function closeImage() {
+
+            document.getElementById("popup").style.display = "none";
+
+        }
+
+
+        // Popup ke bahar click karne par close
+
+        document.getElementById("popup").addEventListener("click", function(event) {
+
+            if (event.target === this) {
+
+                closeImage();
+
+            }
+
+        });
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prince Arya - Resume</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 30px;
+            background: #f2f5f9;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            color: #cf1010;
+            margin-bottom: 25px;
+            font-size: 38px;
+        }
+
+        .resume-box {
+            background: white;
+            width: fit-content;
+            max-width: 95%;
+            margin: auto;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .resume-image {
+            display: block;
+            width: 800px;
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .btn {
+            margin-top: 25px;
+            padding: 14px 30px;
+            background: #1769e0;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0d47a1;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Resume</h1>
+
+    <div class="resume-box">
+
+        <!-- Resume Image -->
+        <img
+            src="image/selfResume.png"
+            alt="Prince Arya Resume"
+            id="resumeImage"
+            class="resume-image"
+        >
+
+    </div>
+
+    <!-- Download Button -->
+    <button class="btn" onclick="downloadResume()">
+  ⬇ Download Resume    </button>
+
+
+    <script>
+
+        function downloadResume() {
+
+            // Resume image ko select karna
+            const image = document.getElementById("resumeImage");
+
+            // Temporary download link banana
+            const link = document.createElement("a");
+
+            // Image ka path
+            link.href = image.src;
+
+            // Download hone wali file ka naam
+            link.download = "Prince_Arya_Resume.png";
+
+            // Link ko page mein add karna
+            document.body.appendChild(link);
+
+            // Automatically click karna
+            link.click();
+
+            // Link ko remove karna
+            document.body.removeChild(link);
+        }
+
+    </script>
+
+</body>
+</html>
