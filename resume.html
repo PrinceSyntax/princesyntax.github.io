@@ -14,7 +14,37 @@
             font-family: Arial, sans-serif;
             text-align: center;
         }
+/* .download-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    background: #2196f3;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+} */
+ .download-btn {
+    padding: 12px 25px;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
 
+.download-btn:hover {
+    background: #00c6ff;
+    transform: translateY(-2px);
+}
+
+.download-btn:hover {
+    background: #00c6ff;
+    transform: translateY(-2px);
+}
         h1 {
             color: #cf1010;
             margin-bottom: 25px;
@@ -67,11 +97,19 @@
 
         <!-- Resume Image -->
         <img
-            src="image/selfResume.png"
-            alt="Prince Arya Resume"
-            id="resumeImage"
-            class="resume-image"
-        >
+    src="selfResume.png"
+    alt="Prince Arya Resume"
+    id="resumeImage"
+    class="resume-image"
+>
+
+<br>
+
+<a href="selfResume.png" download="Prince_Arya_Resume.png">
+    <button type="button" class="download-btn">
+        📥 Download Resume
+    </button>
+</a>
 
     </div>
 
